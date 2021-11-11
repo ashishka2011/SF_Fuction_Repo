@@ -1,0 +1,63 @@
+{
+  "name": "functions_recipes",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Salesforce Functions Recipes Sample App",
+  "author": "salesforce.com",
+  "license": "CC0-1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trailheadapps/functions-recipes"
+  },
+  "scripts": {
+    "clean": "lerna clean && rimraf node_modules **/node_modules",
+    "lint": "eslint **/lwc/**/*.js",
+    "test": "npm run test:unit && npm run test:functions",
+    "test:unit": "sfdx-lwc-jest --skipApiVersionCheck",
+    "test:unit:watch": "sfdx-lwc-jest --watch --skipApiVersionCheck",
+    "test:unit:debug": "sfdx-lwc-jest --debug --skipApiVersionCheck",
+    "test:unit:coverage": "sfdx-lwc-jest --coverage --skipApiVersionCheck",
+    "test:functions": "mocha functions/**/test/*.test.js",
+    "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,ts,json,md,page,trigger,xml,yaml,yml}\"",
+    "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,ts,json,md,page,trigger,xml,yaml,yml}\"",
+    "postinstall": "lerna exec -- npm install && lerna link && husky install",
+    "precommit": "lint-staged && node scripts/generateFunctionDetails.js",
+    "ci:postinstall": "lerna exec -- npm ci && lerna link"
+  },
+  "devDependencies": {
+    "@lwc/eslint-plugin-lwc": "^1.1.0",
+    "@prettier/plugin-xml": "^1.1.0",
+    "@sa11y/jest": "^3.0.0",
+    "@salesforce/eslint-config-lwc": "^3.0.0",
+    "@salesforce/eslint-plugin-aura": "^2.0.0",
+    "@salesforce/eslint-plugin-lightning": "^0.1.1",
+    "@salesforce/sfdx-lwc-jest": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jest": "^25.0.5",
+    "husky": "^7.0.2",
+    "lerna": "^4.0.0",
+    "lint-staged": "^11.2.3",
+    "mocha": "^9.1.2",
+    "prettier": "^2.4.1",
+    "prettier-plugin-apex": "^1.10.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.4.3"
+  },
+  "lint-staged": {
+    "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,ts,xml,yaml,yml}": [
+      "prettier --write"
+    ],
+    "**/lwc/**/*.js": [
+      "eslint",
+      "sfdx-lwc-jest --skipApiVersionCheck -- --bail --findRelatedTests"
+    ]
+  },
+  "volta": {
+    "node": "14.17.3",
+    "npm": "6.14.13"
+  }
+}
