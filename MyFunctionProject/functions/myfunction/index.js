@@ -56,13 +56,15 @@ export default async function (event, context, logger) {
     // Insert the record using the SalesforceSDK DataApi and get the new Record Id from the result
     const { id: recordId } = await context.org.dataApi.create(account);
 
+    /*
     logger.info(
       `AA new id >> ${id}`
     );
+    */
 
     // Query Accounts using the SalesforceSDK DataApi to verify that our new Account was created.
     const soql = `SELECT Fields(STANDARD) FROM Account WHERE Id = '${recordId}'`;
-
+      
     logger.info(
       `AA SOQL >> ${soql}`
     );
