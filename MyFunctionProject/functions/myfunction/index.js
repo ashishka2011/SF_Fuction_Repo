@@ -49,6 +49,10 @@ export default async function (event, context, logger) {
     },
   };
 
+  logger.info(
+    `AA payload ${JSON.stringify(account)}`
+  );
+
   try {
     // Insert the record using the SalesforceSDK DataApi and get the new Record Id from the result
     const { id: recordId } = await context.org.dataApi.create(account);
