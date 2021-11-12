@@ -42,7 +42,6 @@ export default async function (event, context, logger) {
     type: "Account",
     fields: {
       Name: `${name}-${Date.now()}`,
-      AccountNumber: accountNumber,
       Industry: industry,
       Type: type,
       Website: website,
